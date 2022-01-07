@@ -2,26 +2,18 @@ import React, { useContext, useEffect } from "react";
 import { Container, Button, Navbar, Nav, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../contexts/AuthContext";
-// import { BsFillCartFill, BsHeartFill } from "react-icons/bs";
-// import { productContext } from "../contexts/ProductsContext";
-// import { subscribersContext } from "../contexts/SubscribersContext";
 const Navibar = () => {
-    // const { authWithGoogle, googleUser, logOut } = React.useContext(authContext);
-    // const { countOfProducts, countOfProductsFavorites } =
-    //     useContext(productContext);
-    // const { checkSubscribe, checking, deleteSubscribe } =
-    //     useContext(subscribersContext);
-    // let user = JSON.parse(localStorage.getItem("user"));
+    // const { user } = useContext(authContext)
+    const user = JSON.parse(localStorage.getItem("user"));
     // if (!user) {
     //     // console.log(user);
     //     localStorage.setItem(
     //         "user",
     //         JSON.stringify({
-    //             currentUser: {
-    //                 email: "guest",
-    //             },
+    //             username: "guest"
     //         })
     //     );
+
     //     // console.log(JSON.parse(localStorage.getItem("user")));
     // }
     // useEffect(() => {
@@ -85,20 +77,20 @@ const Navibar = () => {
                         >
                             Products
                         </Link>
-                        <button onClick={handleLogOut}>Logout</button>
+                        {/* <button onClick={handleLogOut}>Logout</button> */}
                     </Nav>
-                    {/* {googleUser ? (
+                    {user ? (
                         <>
-                            {googleUser.email === "beknazaromurbek@gmail.com" ? (
+                            {/* {user.role === "admin" ? (
                                 <Link to="/chat" style={{ textDecoration: "none" }}>
                                     <Button className="me-3">Admin</Button>
                                 </Link>
                             ) : (
-                                <Link to={`/chat/${googleUser.email}`}>
+                                <Link to={`/chat/${user.email}`}>
                                     <Button className="me-3">Chat with admin</Button>
                                 </Link>
-                            )}
-                            {checking ? (
+                            )} */}
+                            {/* {checking ? (
                                 <Button
                                     variant="danger"
                                     onClick={() => {
@@ -112,9 +104,9 @@ const Navibar = () => {
                                 <Link to="/subscribe">
                                     <Button>Подписаться</Button>
                                 </Link>
-                            )}
+                            )} */}
 
-                            {googleUser.email !== "beknazaromurbek@gmail.com" ? (
+                            {/* {user.email !== "beknazaromurbek@gmail.com" ? (
                                 <>
                                     <Link style={{ marginRight: "10px" }} to="/cart">
                                         {" "}
@@ -133,9 +125,9 @@ const Navibar = () => {
                                 </>
                             ) : (
                                 <></>
-                            )}
+                            )} */}
 
-                            <h6>{googleUser.displayName}</h6>
+                            <h6>{user.username}</h6>
                             <Button
                                 style={{ marginLeft: "10px" }}
                                 onClick={() => {
@@ -147,15 +139,13 @@ const Navibar = () => {
                         </>
                     ) : (
                         <>
-                            <Button variant="outline-dark" onClick={authWithGoogle}>
-                                <img
-                                    width="30px"
-                                    src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-                                    alt="google"
-                                />
-                            </Button>
+                            <Link to="/login">
+                                <Button variant="outline-dark" >
+                                    Войти
+                                </Button>
+                            </Link>
                         </>
-                    )} */}
+                    )}
                 </Navbar.Collapse>
             </Container>
         </Navbar>

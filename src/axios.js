@@ -5,7 +5,7 @@ const $axios = axios.create({
 });
 $axios.interceptors.request.use((config) => {
     const token = JSON.parse(localStorage.getItem('token')) || '';
-    console.log(token);
+    // console.log(token);
     config.headers = {
         Authorization: `JWT ${token.accessToken}`,
     };

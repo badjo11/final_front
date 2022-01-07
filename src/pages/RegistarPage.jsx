@@ -9,6 +9,7 @@ import { authContext } from "../contexts/AuthContext";
 export default function RegisterPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false)// eslint-disable-line
     const { signUpUser, logSuccess, errorMSG } = useContext(authContext)
@@ -40,7 +41,7 @@ export default function RegisterPage() {
 
                             }
                             setIsSubmitting(true);
-                            signUpUser(email, password)
+                            signUpUser(email, password, username)
                                 .then((response) => {
                                 })
                                 .catch((error) => {
@@ -66,6 +67,16 @@ export default function RegisterPage() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 name="email"
                                 type="email"
+                            // required
+                            />
+                        </div>
+                        <div className="data">
+                            <label>Ваш Username</label>
+                            <input
+                                // value="email"
+                                onChange={(e) => setUsername(e.target.value)}
+                                name="username"
+                                type="text"
                             // required
                             />
                         </div>

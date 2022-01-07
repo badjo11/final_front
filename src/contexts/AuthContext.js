@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-
+import jwt_decode from "jwt-decode";
 // import { APIusers } from "../const/config";
 import axios from "axios";
 import $axios from "../axios";
@@ -29,13 +29,14 @@ const AuthContextProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
     // AUTH with google
 
-    const signUpUser = async (email, password) => {
+    const signUpUser = async (email, password, username) => {
         try {
             let res = await $axios('user');
 
             let { data } = await $axios.post('user/signup', {
                 password,
                 email,
+                username
             });
             localStorage.setItem('token', JSON.stringify(data))
             await $axios('user');
@@ -47,6 +48,8 @@ const AuthContextProvider = (props) => {
                 type: "LOG_SUCCESS",
                 payload: true,
             });
+            const user = jwt_decode(data.accessToken);
+            localStorage.setItem('user', JSON.stringify(user))
         } catch (e) {
             dispatch({
                 type: "LOG_SUCCESS",
@@ -62,7 +65,6 @@ const AuthContextProvider = (props) => {
     const loginUser = async (email, password) => {
         try {
             let res = await $axios('user');
-            let user = res.data.find((user) => user.email === email);
             // if (user) {
             // if (user.password !== password) {
             //     console.log("wrong password");
@@ -82,7 +84,8 @@ const AuthContextProvider = (props) => {
                 type: "LOG_SUCCESS",
                 payload: true,
             });
-            localStorage.setItem('user', JSON.stringify({ email, password }))
+            const user = jwt_decode(data.accessToken);
+            localStorage.setItem('user', JSON.stringify(user))
 
             // }
         } catch (error) {
