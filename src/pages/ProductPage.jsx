@@ -28,9 +28,17 @@ const ProductPage = () => {
 
     let object = new URLSearchParams(window.location.search);
     const [brandValue, setBrandValue] = useState("");
+    const [resetFilter, setResetFilter] = useState(false)
     function filterProducts(key, value) {
+        // if (key) {
         object.set(key, value);
+
+        // console.log(resetFilter)
         let newUrl = `${window.location.pathname}?${object.toString()}`;
+        if (!key) {
+            newUrl = '/products'
+        }
+        console.log(newUrl)
         navigate(newUrl);
         getProducts();
         setBrandValue(value);
@@ -224,6 +232,11 @@ const ProductPage = () => {
                         id="inline-radio-2"
                     // onChange={() => setRole('pac')}
                     />
+
+                    <Button onClick={() => {
+                        filterProducts("", "")
+                        setBrandValue("qwe")
+                    }}>Reset filters</Button>
                 </Form.Group>
             </div>
             <div style={{ width: "85%" }}>

@@ -20,6 +20,8 @@ const reducer = (state = INIT_STATE, action) => {
             return { ...state, logSuccess: action.payload }
         case "ERROR_MSG":
             return { ...state, errorMSG: action.payload }
+        case "GET_USER":
+            return { ...state, user: action.payload }
         default:
             return state;
     }
@@ -117,6 +119,19 @@ const AuthContextProvider = (props) => {
             console.log(e);
         }
     };
+
+    const getUser = async (id) => {
+        try {
+            const user = await $axios.get('user/' + id)
+
+            dispatch({
+                type: "GET_USER",
+                payload: user
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <authContext.Provider
             value={{
@@ -125,7 +140,8 @@ const AuthContextProvider = (props) => {
                 loginUser,
                 user: state.user,
                 logSuccess: state.logSuccess,
-                errorMSG: state.errorMSG
+                errorMSG: state.errorMSG,
+                getUser
             }}
         >
             {props.children}

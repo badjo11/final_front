@@ -43,8 +43,8 @@ const ProductContextProvider = (props) => {
 
             let filter = window.location.search;
             let filter1 = window.location.search;
-            console.log(filter)
-            console.log(page)
+            // console.log(filter)
+            // console.log(page)
             if (filter)
                 filter += `&page=${page}`
             else
@@ -66,7 +66,7 @@ const ProductContextProvider = (props) => {
                 type: "GET_PRODUCTS",
                 payload: data.rows,
             };
-            console.log(response)
+            // console.log(response)
             dispatch(action);
         } catch (e) {
             console.log(e);
@@ -77,7 +77,7 @@ const ProductContextProvider = (props) => {
 
     const getProductsToEdit = async (id) => {
         try {
-            const response = await $axios.get(`product / ${id} `);
+            const response = await $axios.get(`product/${parseInt(id)}`);
             let action = {
                 type: "GET_PRODUCTS_TO_EDIT",
                 payload: response.data,
@@ -91,7 +91,7 @@ const ProductContextProvider = (props) => {
 
     const saveEditedProducts = async (editedProducts) => {
         try {
-            await $axios.patch(`product / ${editedProducts.id} `, editedProducts);
+            await $axios.patch(`product/${editedProducts.id}`, editedProducts);
             getProducts();
             clearState();
         } catch (e) {

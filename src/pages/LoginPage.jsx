@@ -15,7 +15,7 @@ export default function Registerpage() {
     const [isSubmitting, setIsSubmitting] = useState(false); // eslint-disable-line
     const { loginUser, errorMSG, logSuccess } = useContext(authContext)
     //   const { login } = useAuth();
-    console.log(logSuccess);
+    // console.log(logSuccess);
     useEffect(() => {
         if (logSuccess)
             navigate('/')
